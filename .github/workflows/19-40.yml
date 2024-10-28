@@ -1,0 +1,24 @@
+name: 定时任务
+
+# 触发条件：每天中国时间下午 20:00 触发
+on:
+  schedule:
+    - cron: '40 11 * * *'  # UTC 时间的 11:40，对应中国时间的 19:40
+
+jobs:
+  run_scheduled_task:
+    runs-on: ubuntu-latest
+
+    # 设置时区为中国上海
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: 打印当前时间
+        run: |
+          echo "当前时区：$TZ"
+          echo "当前时间：$(date)"
+      
+      # 添加您需要执行的其他步骤
+      - name: 示例任务
+        run: echo "这是一个定时任务，运行时间为每天中国时间下午 20:00"
